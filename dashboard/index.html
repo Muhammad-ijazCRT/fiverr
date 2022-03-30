@@ -1,0 +1,562 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Snippet - GoSNippets</title>
+    <link href='' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' rel='stylesheet'>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Roboto", sans-serif;
+        }
+        
+        .header {
+            z-index: 1;
+            /* position: fixed; */
+            /* background: #161616;
+            height: 50px; */
+            /* padding: 20px; */
+            /* width: calc(100% - 0%); */
+            /* top: 0; */
+            /* margin-top: -15px; */
+            /* padding: 16px; */
+        }
+        
+        .left_area h3 {
+            color: #fff;
+            /* margin: 0; */
+            /* text-transform: uppercase; */
+            /* font-size: 22px; */
+            /* font-weight: 900; */
+            /* text-align: center; */
+        }
+        
+        .left_area span {
+            color: #19B3D3;
+        }
+        
+        .logout_btn {
+            padding: 5px;
+            background: #19B3D3;
+            text-decoration: none;
+            float: right;
+            /* margin-top: -30px; */
+            /* margin-right: 40px; */
+            border-radius: 2px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+            transition: 0.5s;
+            /* transition-property: background; */
+        }
+        
+        .logout_btn:hover {
+            background: #0B87A6;
+        }
+        
+        .sidebar {
+            z-index: 1;
+            top: 0;
+            background: #fff;
+            margin-top: 70px;
+            padding-top: 30px;
+            position: fixed;
+            left: 0;
+            width: 250px;
+            height: calc(100% - 9%);
+            transition: 0.5s;
+            transition-property: left;
+            overflow-y: auto;
+        }
+        
+        .profile_info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .sidebar .profile_info .profile_image {
+            width: 100px;
+            height: 100px;
+            border-radius: 100px;
+            margin-bottom: 10px;
+        }
+        
+        .sidebar .profile_info h4 {
+            color: red;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        .sidebar a {
+            color: #222222;
+            display: block;
+            width: 100%;
+            line-height: 60px;
+            text-decoration: none;
+            padding-left: 40px;
+            box-sizing: border-box;
+            transition: 0.9s;
+            transition-property: background;
+        }
+        
+        .sidebar a:hover {
+            background: #19B3D3;
+        }
+        
+        .sidebar i {
+            padding-right: 10px;
+        }
+        
+        label #sidebar_btn {
+            z-index: 1;
+            color: #fff;
+            position: fixed;
+            cursor: pointer;
+            /* left: 300px; */
+            font-size: 20px;
+            /* margin: 5px 0; */
+            transition: 0.9s;
+            transition-property: color;
+        }
+        
+        label #sidebar_btn:hover {
+            color: #19B3D3;
+        }
+        
+        #check:checked~.sidebar {
+            left: -185px;
+        }
+        
+        #check:checked~.sidebar a span {
+            display: none;
+        }
+        
+        #check:checked~.sidebar a {
+            font-size: 20px;
+            margin-left: 165px;
+            width: 100%;
+        }
+        
+        .content {
+            width: (100% - 250px);
+            margin-top: 60px;
+            padding: 20px;
+            margin-left: 250px;
+            background: url(background.png) no-repeat;
+            background-position: center;
+            background-size: cover;
+            height: 100vh;
+            transition: 0.9s;
+        }
+        
+        #check:checked~.content {
+            margin-left: 60px;
+        }
+        
+        #check:checked~.sidebar .profile_info {
+            display: none;
+        }
+        
+        #check {
+            display: none;
+        }
+        
+        .mobile_nav {
+            display: none;
+        }
+        
+        .content .card p {
+            background: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        /* Responsive CSS */
+        
+        @media screen and (max-width: 780px) {
+            .sidebar {
+                display: none;
+            }
+            #sidebar_btn {
+                display: none;
+            }
+            .content {
+                margin-left: 0;
+                margin-top: 0;
+                /* padding: 10px 20px; */
+                transition: 0.5s;
+            }
+            #check:checked~.content {
+                margin-left: 0;
+            }
+            .mobile_nav {
+                display: block;
+                width: calc(100% - 0%);
+            }
+            .nav_bar {
+                background: #222;
+                width: (100% - 0px);
+                margin-top: 70px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 20px;
+            }
+            .nav_bar .mobile_profile_image {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+            .nav_bar .nav_btn {
+                color: #fff;
+                font-size: 22px;
+                cursor: pointer;
+                transition: 0.5s;
+                transition-property: color;
+            }
+            .nav_bar .nav_btn:hover {
+                color: #19B3D3;
+            }
+            .mobile_nav_items {
+                background: #2F323A;
+                display: none;
+            }
+            .mobile_nav_items a {
+                color: #fff;
+                display: block;
+                text-align: center;
+                letter-spacing: 1px;
+                line-height: 60px;
+                text-decoration: none;
+                box-sizing: border-box;
+                transition: 0.5s;
+                transition-property: background;
+            }
+            .mobile_nav_items a:hover {
+                background: #19B3D3;
+            }
+            .mobile_nav_items i {
+                padding-right: 10px;
+            }
+            .active {
+                display: block;
+            }
+        }
+    </style>
+    <script type='text/javascript' src=''></script>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type='text/javascript' src=''></script>
+</head>
+
+<body class='snippet-body'>
+    <input type="checkbox" id="check">
+    <!--header area start-->
+
+
+    <div class="container-fluid">
+        <div class="row header d-flex align-items-center" style="background-color: #161616; position: fixed; height: 60px; padding: 10px; width: 100%; top: 0;">
+
+            <!-- button show and hide sidebar content -->
+            <div class="col-md-4">
+                <label for="check" style="margin-bottom: 15px;"> 
+                <i class="fas fa-bars" id="sidebar_btn"></i>
+                </label>
+            </div>
+
+            <!-- left -->
+            <div class="col-md-5">
+                <h4 style="color: white; margin-top: 15px;">AMPLE LOAN DASHBOARD</h4>
+            </div>
+
+
+            <!-- right -->
+            <div class="col-md-3" style="text-align: end;">
+                <div class="right_area" style="margin-right: 30px;">
+                    <span style="color: white; margin-right: 15px;"><i class="fa fa-bell" aria-hidden="true"></i></span>
+                    <span style="color: white;"><i class="fa fa-user" aria-hidden="true"></i></span>
+
+                    <!-- <a href="#" class="logout_btn">Logout</a> -->
+
+
+                </div>
+            </div>
+
+            <!-- contenter header -->
+        </div>
+    </div>
+
+
+
+    <!--mobile navigation bar start-->
+    <!-- <div class="mobile_nav">
+        <div class="nav_bar">
+            <img src="1.png" class="mobile_profile_image" alt="">
+            <i class="fa fa-bars nav_btn"></i>
+        </div>
+        <div class="mobile_nav_items">
+            <a href="#" id="sidebar_btn"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+            <a href="#"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+            <a href="#"><i class="fas fa-cogs"></i><span>Components</span></a>
+            <a href="#"><i class="fas fa-table"></i><span>Tables</span></a>
+            <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
+            <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
+            <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
+            <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
+        </div>
+    </div> -->
+
+    <!--pc navigation -->
+    <div class="sidebar">
+        <a href="#"><i class="fas fa-home"></i><span>Dashboard</span></a>
+        <a href="#"><i class="fa fa-list-ul"></i><span>Components</span></a>
+        <a href="#"><i class="fas fa-cloud"></i></i><span>Data</span></a>
+        <a href="#"><i class="fas fa-user-friends"></i><span>Group</span></a>
+        <!-- <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
+        <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a> -->
+    </div>
+    <!--sidebar end-->
+
+
+
+    <div class="content" style="background-color: #F7F7F7;">
+        <div class="container-fluid">
+            <div class="row">
+
+
+                <div class="card" style="background-color: #F4F4F4; margin: 0px; padding: 0px;">
+                    <div class="card-header">
+                        <!-- dashbord and report button 8 columns -->
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dashboard
+                            </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item" href="#">Action</a></li>
+                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- report button 4 columns -->
+                            <div class="col-md-4" style="text-align: end; ">
+                                <button class="btn btn-sm btn-primary p-2">REPORT </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- card header end -->
+
+                    <!-- card body -->
+
+                    <div class="card-body" style="margin: 0px; padding: 0px;">
+                        <div class="row">
+                            <div class="col-md-7" style="background-color: #fff; margin-left: 15px;">
+
+                                <div class="row">
+                                    <h4 style="margin: 0px; padding: 0px;">DAILY SUMMERY</h4>
+                                </div>
+                                <div class="row ">
+                                    <table class="table" style="margin: 0px; padding: 0px;">
+                                        <thead class="" style="background-color: #0F62FE;">
+                                            <tr>
+                                                <th scope="col">Total</th>
+                                                <th scope="col">Passed</th>
+                                                <th scope="col">Day</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="margin: 0px; padding: 0px; ">
+                                            <tr>
+                                                <td> <span style=" font-weight: bold;">574</span>
+                                                    <br> Applications
+                                                </td>
+                                                <td scope="row"><span style=" font-weight: bold;">125</span>
+                                                    <br>Applications
+                                                </td>
+                                                <td><span style=" font-weight: bold;">Monday</span></td>
+                                            </tr>
+
+                                            <!-- 2.0 columns -->
+                                            <tr>
+                                                <td><span style=" font-weight: bold;"> Feature Importance</span>
+                                                    <br> Clusters
+                                                </td>
+                                                <td></td>
+                                                <td style="text-align: end; font-weight: bold;">2
+                                                    <span style="color: green;"><i class='fa fa-check'></i></span>
+
+                                                </td>
+                                            </tr>
+
+                                            <!-- 2 columns -->
+                                            <tr>
+                                                <td><span style=" font-weight: bold;"> VPC</span></td>
+                                                <td></td>
+
+                                                <td style="text-align: end; font-weight: bold;">5
+                                                    <span style="color: red;"><i class="fa fa-times" aria-hidden="true"></i></span>
+
+                                                    <span style="margin-left: 5px;">2</span>
+                                                    <span style="color: green;"><i class='fa fa-check'></i></span>
+                                                </td>
+                                            </tr>
+
+                                            <!-- 3 columns -->
+                                            <tr>
+                                                <td><span style=" font-weight: bold;"> APP</span></td>
+                                                <td></td>
+                                                <td style="text-align: end; font-weight: bold;">
+                                                    <span style="margin-left: 5px;">2</span>
+                                                    <span style="color: green;"><i class='fa fa-check'></i></span>
+                                                </td>
+                                            </tr>
+
+
+                                            <!-- 4 columns -->
+                                            <tr>
+                                                <td><span style=" font-weight: bold;"> Storage</span>
+                                                </td>
+                                                <td></td>
+
+                                                <td style="text-align: end; font-weight: bold;">5
+                                                    <span style="color: red;"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                                </td>
+                                            </tr>
+
+
+                                            <!-- 5 columns -->
+                                            <tr>
+                                                <td><span style=" font-weight: bold;"> Image Recognition System</span></td>
+                                                <td></td>
+
+                                                <td style="text-align: end; font-weight: bold;">5
+                                                    <span style="color: red;"><i class="fa fa-times" aria-hidden="true"></i></span>
+
+                                                    <span style="margin-left: 5px; font-weight: bold;">2</span>
+                                                    <span style="color: green;"><i class='fa fa-check'></i></span>
+                                                </td>
+                                            </tr>
+
+
+                                            <!-- 6 columns -->
+                                            <tr>
+                                                <td><span style=" font-weight: bold;"> NLP Services</span></td>
+                                                <td></td>
+                                                <td style="text-align: end;">
+                                                    <span style="font-weight: bold;">10</span>
+                                                    <span style="color: green; "><i class='fa fa-check'></i></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- card body end -->
+                            </div>
+
+                            <!-- 4 -->
+                            <div class="col-md-4" style="margin-left: 15px;">
+                                <div class="row ">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h3>Pendding Decision</h3>
+                                            <h4 style="margin: 0px; padding: 0px; font-weight: bold;">2</h4>
+                                            <span>Pendding</span><br> <br>
+                                            <button type="button" class="btn btn-outline-primary">View All</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row mt-2">
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h3>Rejected</h3>
+                                            <h4 style="margin: 0px; padding: 0px; font-weight: bold;">25</h4>
+                                            <span>Rejected</span><br> <br>
+                                            <button type="button" class="btn btn-outline-primary">View All</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- js chart  -->
+                    <div class="row" style="background-color: #F4F4F4; padding: 20px;
+                        padding: 25px 25px 25px 25px;
+                        outline-style: solid;
+                        outline-width: 10px; outline-color: #F4F4F4; height: 400px;">
+                        <div class="card card-body" style="height: 300px;">
+                            <canvas id="mixed-chart" width="300px" height="90px"></canvas>
+                        </div>
+
+                    </div>
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="width: 100%; height: 400px;"></div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js " integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p " crossorigin="anonymous "></script>
+    <script type='text/javascript'>
+        new Chart(document.getElementById("mixed-chart"), {
+            type: 'bar',
+            data: {
+                labels: ["1900", "1950", "1999", "2050"],
+                datasets: [{
+                    label: "Europe",
+                    type: "line",
+                    borderColor: "#8e5ea2",
+                    data: [408, 547, 675, 734],
+                    fill: false
+                }, {
+                    label: "Africa",
+                    type: "line",
+                    borderColor: "#3e95cd",
+                    data: [133, 221, 783, 2478],
+                    fill: false
+                }, {
+                    label: "Europe",
+                    type: "bar",
+                    backgroundColor: "rgba(0,0,0,0.2)",
+                    data: [408, 547, 675, 734],
+                }, {
+                    label: "Africa",
+                    type: "bar",
+                    backgroundColor: "rgba(0,0,0,0.2)",
+                    backgroundColorHover: "#3e95cd",
+                    data: [133, 221, 783, 2478]
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Population growth (millions): Europe & Africa'
+                },
+                legend: {
+                    display: false
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
